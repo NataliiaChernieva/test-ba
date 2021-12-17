@@ -11,4 +11,6 @@ export const FacultyDescription = styled.p``;
 export const FacultyTeachers = styled.ul``;
 
 export const ExpandContainer = styled.div``;
+
+export const FacultyPhone = styled.a``;
  
