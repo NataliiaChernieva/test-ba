@@ -1,5 +1,10 @@
+import { AddBtn } from './AddButton.styled';
+import { AiOutlinePlus } from 'react-icons/ai';
+
 export default function AddButton() {
     return (
-        <button></button>
+        <AddBtn>
+            <AiOutlinePlus/>
+        </AddBtn>
     )
 }

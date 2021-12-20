@@ -1,9 +1,11 @@
 import { BiSearch } from 'react-icons/bi';
+import { SearchBtn } from './Searchbotton.styled';
 
-export default function SearchButton({onClick}) {
+export default function SearchButton({ onClick }) {
+    
     return (
-        <button onClick={onClick}>
+        <SearchBtn onClick={onClick}>
             <BiSearch />
-        </button>
+        </SearchBtn>
     )
 }

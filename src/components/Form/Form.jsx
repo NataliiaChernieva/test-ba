@@ -49,7 +49,7 @@ export default function Form() {
 
     faculties.find(savedFaculty => savedFaculty.name === name)
       ? alert(`Факультет ${name} вже існує`)
-      : dispatch(postFaculty({ name, number, id }));
+      : dispatch(postFaculty({ name, director, number, description, teachers }));
       
     reset();
   };

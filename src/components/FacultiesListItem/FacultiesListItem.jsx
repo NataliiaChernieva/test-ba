@@ -1,23 +1,42 @@
-import { ListItem, FacultyName, ExpandContainer, FacultyDirector, FacultyPhone, FacultyDescription, FacultyTeachers } from "./FacultiesListItem.styled";
+import useCollapse from 'react-collapsed';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import {
+    ListItem,
+    ListItemBox,
+    ButtonBox,
+    FacultyName,
+    ExpandContainer,
+    FacultyDirector,
+    FacultyPhone,
+    FacultyDescription } from "./FacultiesListItem.styled";
 import SearchButton from '../SearchButton/SearchButton';
-import ExpandButton from '../ExpandButton/ExpandButton';
+import { ExpandButton } from '../ExpandButton/ExpandButton.styled';
 
-export default function FacultiesListItem({name, director, description, phone, teachers}) {
+
+export default function FacultiesListItem({ name, director, description, phone, teachers }) {
+    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse()
     return (
         <ListItem>
-            <FacultyName>{name}</FacultyName>
-            <ExpandContainer>
-                <FacultyDirector>{director}</FacultyDirector>
-                <FacultyPhone href="tel: ${phone}">{ phone}</FacultyPhone>
+            <ListItemBox>
+                <FacultyName>{name}</FacultyName>
+                <ButtonBox>
+                    <SearchButton />
+                    <ExpandButton {...getToggleProps()}>
+                       {isExpanded ? <IoIosArrowUp/> : <IoIosArrowDown/>}
+                    </ExpandButton>
+                </ButtonBox>
+            </ListItemBox>
+            
+            <ExpandContainer {...getCollapseProps()}>
+                <FacultyDirector>Декан факультету: {director}</FacultyDirector>
+                <FacultyPhone>Телефон факультету: { phone}</FacultyPhone>
                 <FacultyDescription>{description}</FacultyDescription>
-                <FacultyTeachers>
+                {/* <FacultyTeachers>
                     {teachers.map((teacher) => (
                         <li>{teacher}</li>
                     ))}
-                </FacultyTeachers>
-            </ExpandContainer>
-            <SearchButton />
-            <ExpandButton/>
+                </FacultyTeachers> */}
+            </ExpandContainer>        
         </ListItem>
     )
     

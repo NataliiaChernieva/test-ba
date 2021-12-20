@@ -1,10 +1,22 @@
-import { List } from './FacultiesList.styled'
-import FacultiesListItem from '../FacultiesListItem/FacultiesListItem'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { List } from './FacultiesList.styled';
+import FacultiesListItem from '../FacultiesListItem/FacultiesListItem';
+import { fetchFaculties } from '../../redux/faculties/facultiesOperations';
+import { getFilteredFaculties } from '../../redux/faculties/facultiesSelectors';
 
-export default function FacultiesList({faculties}) {
+export default function FacultiesList() {
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(fetchFaculties());
+    }, [dispatch]);
+
+    const filteredFaculties = useSelector(getFilteredFaculties);
+    
     return (
         < List >
-            {faculties.map(({id, name, director, phone, description, teachers}) => (
+            {filteredFaculties.map(({id, name, director, phone, description, teachers}) => (
                 <FacultiesListItem
                     key={id}
                     name={name}

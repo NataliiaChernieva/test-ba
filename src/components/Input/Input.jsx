@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import { CurrentInput, CurrentLabel } from './Input.styled';
 
 export default function Input({
-  type,
+  type=null,
   name,
   value,
   pattern = null,
   title = null,
+  placeholder = null,
   onChange,
 }) {
   return (
@@ -18,6 +19,7 @@ export default function Input({
         value={value}
         pattern={pattern}
         title={title}
+        placeholder = {placeholder}
         onChange={onChange}
       />
     </CurrentLabel>
@@ -25,7 +27,7 @@ export default function Input({
 }
 
 Input.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
