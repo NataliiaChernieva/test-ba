@@ -12,6 +12,7 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   display: block;
+  color: darkorange;
   font-size: 26px;
   font-weight: 800;
   text-align: center;

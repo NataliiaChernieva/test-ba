@@ -7,9 +7,10 @@ export const ExpandButton = styled.button`
  
    &:hover,
    &:focus{
-       background-color: red;
-       border: red;
+       background-color: darkorange;;
        outline: none;
+       border-color: darkorange;
+       border: 2px solid darkorange;
    }
 `;
 

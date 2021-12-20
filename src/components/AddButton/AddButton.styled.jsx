@@ -1,16 +1,14 @@
 import styled from '@emotion/styled';
 
 export const AddBtn = styled.button`
-  border-radius: 50%;
+   border-radius: 50%;
    padding: 8px;
-   margin-top: 3px;
-   margin-bottom: 3px;
 
    &:hover,
    &:focus{
-       background-color: red;
+       background-color: darkorange;;
        outline: none;
-       border-color: red;
-       border: 2px;
+       border-color: darkorange;
+       border: 2px solid darkorange;
    }
 `;
