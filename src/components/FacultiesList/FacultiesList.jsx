@@ -16,14 +16,14 @@ export default function FacultiesList() {
     
     return (
         < List >
-            {filteredFaculties.map(({id, name, director, phone, description, teachers}) => (
+            {filteredFaculties.map(({id, name, director, phone, description}) => (
                 <FacultiesListItem
                     key={id}
                     name={name}
                     director={director}
                     phone={phone}
                     description={description}
-                    teachers={teachers}
+                   
                 />
             ))}
         </List >

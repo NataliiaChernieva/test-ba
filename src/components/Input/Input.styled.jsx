@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const CurrentInput = styled.input`
   display: block;
+  width: 300px;
   margin-top: 6px;
   margin-bottom: 20px;
 `;

@@ -1,9 +1,9 @@
 import { AddBtn } from './AddButton.styled';
 import { AiOutlinePlus } from 'react-icons/ai';
 
-export default function AddButton() {
+export default function AddButton({onClick}) {
     return (
-        <AddBtn>
+        <AddBtn onClick={onClick}>
             <AiOutlinePlus/>
         </AddBtn>
     )

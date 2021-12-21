@@ -2,7 +2,8 @@ import styled from '@emotion/styled';
 
 export const SearchBtn = styled.button`
    border-radius: 50%;
-   padding: 6px;
+   padding: 5px;
+   cursor: pointer;
     
    &:hover,
    &:focus{

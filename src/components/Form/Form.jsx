@@ -1,43 +1,42 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormContainer, Button } from "./Form.styled";
+import { createPortal } from 'react-dom';
+import { MdClose } from 'react-icons/md';
+import { Overlay, CloseBtn, FormContainer, Button, TextArea } from "./Form.styled";
 import Input from '../Input/Input';
-import {postFaculty} from 'redux/faculties/facultiesOperations';
-import { getFaculties } from 'redux/faculties/facultiesSelectors';
+import {postFaculty} from '../../redux/faculties/facultiesOperations';
+import { getFaculties } from '../../redux/faculties/facultiesSelectors';
 
-export default function Form() {
+const modalRoot = document.getElementById('modal-root');
+
+export default function Form({show, setShow}) {
     const [name, setName] = useState('');
     const [director, setDirector] = useState('');
-    const [number, setNumber] = useState('');
+    const [phone, setPhone] = useState('');
     const [description, setDescription] = useState('');
-    const [teachers, setTeachers] = useState('');
-
+    
     const dispatch = useDispatch();
     const faculties = useSelector(getFaculties);
 
     const handleSetInfo = e => {
     const { name, value } = e.target;
     switch (name) {
-      case 'name':
+      case 'Назва факультету':
         setName(value);
         break;
         
-      case 'director':
+      case 'Декан факультету':
         setDirector(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'Номер телефону':
+        setPhone(value);
         break;
         
       case 'description':
         setDescription(value);
         break;
 
-      case 'teachers':
-        setTeachers(value);
-        break;
-     
       default:
         return;
     }
@@ -45,28 +44,33 @@ export default function Form() {
     
     const handleAddFaculty = e => {
     e.preventDefault();
-    // const id = uuidv4();
-
     faculties.find(savedFaculty => savedFaculty.name === name)
       ? alert(`Факультет ${name} вже існує`)
-      : dispatch(postFaculty({ name, director, number, description, teachers }));
+      : dispatch(postFaculty({ name, director, phone, description}));
       
-    reset();
+      reset();
+      setShow(!show);
   };
 
   const reset = () => {
       setName('');
       setDirector('');
-      setNumber('');
+      setPhone('');
       setDescription('');
-      setTeachers('');
   };
+
+  const closeModal = () => {
+      setShow(!show);
+    }
     
-    return (
-        <FormContainer onSubmit={handleAddFaculty}>
+  return (
+    createPortal(
+      <Overlay>
+        <CloseBtn type='button'onClick={closeModal}><MdClose size='2em'/></CloseBtn>
+        <FormContainer show={show} onSubmit={handleAddFaculty}>
             <Input
               type="text"
-              name="name"
+              name="Назва факультету"
               value={name}
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Назва факультету має складатися тілько з букв, апострофу, тире и пробелів. Наприклад Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan і т. д."
@@ -75,33 +79,28 @@ export default function Form() {
             />
             <Input
               type="text"
-              name="director"
+              name="Декан факультету"
               value={director}
               onChange={handleSetInfo}
             />
             <Input
               type="tel"
-              name="number"
-              value={number}
+              name="Номер телефону"
+              value={phone}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Номер телефону має складатися з цифр і може містити пробіли, тире, круглі дужкиб також може починатися з +"
               onChange={handleSetInfo}
             />
-            <textarea
+            <TextArea
               name="description"
               value={description}
               rows="5"
-              cols="40"
               placeholder='Добавте опис факультету'
               onChange={handleSetInfo}
-            ></textarea>
-            <Input
-              type="text"
-              name="teachers"
-              value={teachers}
-              onChange={handleSetInfo}
-            />
-            <Button type="submit" text="Зберегти" />
+            ></TextArea>
+            <Button type="submit" onClick={handleAddFaculty}>Зберегти</Button>
         </FormContainer>
+      </Overlay>, modalRoot
     )
+  )
 }

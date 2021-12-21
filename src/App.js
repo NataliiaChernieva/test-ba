@@ -3,13 +3,11 @@ import { Container, Title, TopBox } from './components/Container/Container.style
 import FacultiesList from './components/FacultiesList/FacultiesList.jsx';
 import Filter from './components/Filter/Filter.jsx';
 import AddButton from './components/AddButton/AddButton.jsx';
+import Form from './components/Form/Form.jsx';
 
 function App() {
   const [show, setShow] = useState(false)
-  // const handleAddButtonClick = e => {
-    
-  // }
-
+  
   return (
     <Container>
       <Title>Факультети університету</Title>
@@ -17,8 +15,8 @@ function App() {
         <Filter/>
         <AddButton onClick={()=> setShow(!show)}/>
       </TopBox>
-      <FacultiesList/>
-      
+      <FacultiesList />
+      {show && <Form show={show} setShow={setShow}/>}
     </Container>  
   );
 }
