@@ -19,6 +19,12 @@ export const ButtonBox = styled.div`
   display: flex;
 `;
 
+export const SearchInput = styled.input`
+margin-top: 6px;
+`;
+export const Hightlight = styled.span`
+background-color: orange;`;
+
 export const FacultyName = styled.h2``;
 
 export const FacultyDirector = styled.p`
