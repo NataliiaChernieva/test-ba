@@ -6,7 +6,7 @@ import {
     ListItemBox,
     ButtonBox,
     SearchInput,
-    Hightlight,
+    // Hightlight,
     FacultyName,
     ExpandContainer,
     FacultyDirector,
@@ -26,11 +26,12 @@ export default function FacultiesListItem({ name, director, description, phone }
         const inputValue = e.target.value.toLowerCase();
         console.log('inputValue :>> ', inputValue);
         setValue(inputValue);
-        // const co = description.split().find(text => text.toLowerCase().includes(inputValue));
-        const index = description.indexOf(inputValue);
-        console.log('index :>> ', index);
-        if (index !== -1) {
-            // description.substring(0, index) + <Hightlight> + description.substring(index, index + inputValue.length) + </Hightlight> + description.substring(index + inputValue.length);
+        const inputText = document.getElementById(description.id);
+        let innerHTML = inputText.innerHTML;
+        const index = innerHTML.indexOf(inputValue);
+        if (index >= 0) {
+            innerHTML = innerHTML.substring(0, index) + "<span style={background-color: #ff7c00 }>" + innerHTML.substring(index, index + inputValue.length) + "</span>" + innerHTML.substring(index + inputValue.length);
+            inputText.innerHTML = innerHTML;
         }
     }
 
@@ -54,7 +55,7 @@ export default function FacultiesListItem({ name, director, description, phone }
             <ExpandContainer {...getCollapseProps()}>
                 <FacultyDirector>Декан факультету: {director}</FacultyDirector>
                 <FacultyPhone>Телефон факультету: { phone}</FacultyPhone>
-                <FacultyDescription>{description}</FacultyDescription>
+                <FacultyDescription id={description.id}>{description.text}</FacultyDescription>
             </ExpandContainer>        
         </ListItem>
     )
